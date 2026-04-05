@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Domain
 
 struct TodoListState {
     var todos: [Todo] = []

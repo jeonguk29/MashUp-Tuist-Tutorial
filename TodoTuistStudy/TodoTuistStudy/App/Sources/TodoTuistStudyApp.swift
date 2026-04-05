@@ -1,4 +1,5 @@
 import SwiftUI
+import Domain
 
 @main
 struct TodoTuistStudyApp: App {
@@ -7,7 +8,7 @@ struct TodoTuistStudyApp: App {
             let repository = InMemoryTodoRepository(
                 initialTodos: [
                     Todo(title: "Tuist 프로젝트 구조 이해하기", isDone: false),
-                    Todo(title: "최소 TODO 앱 만들기", isDone: true)
+                    Todo(title: "Domain 타깃 분리하기", isDone: true)
                 ]
             )
 

@@ -1,4 +1,5 @@
 import SwiftUI
+import Domain
 
 struct ContentView: View {
     @StateObject private var viewModel: TodoListViewModel
@@ -58,22 +59,4 @@ private extension ContentView {
             .buttonStyle(.borderedProminent)
         }
     }
-}
-
-#Preview {
-    let repository = InMemoryTodoRepository(
-        initialTodos: [
-            Todo(title: "Tuist 프로젝트 구조 이해하기", isDone: false),
-            Todo(title: "레이어 분리 연습하기", isDone: true)
-        ]
-    )
-
-    let viewModel = TodoListViewModel(
-        fetchTodosUseCase: FetchTodosUseCase(repository: repository),
-        addTodoUseCase: AddTodoUseCase(repository: repository),
-        toggleTodoUseCase: ToggleTodoUseCase(repository: repository),
-        deleteTodoUseCase: DeleteTodoUseCase(repository: repository)
-    )
-
-    return ContentView(viewModel: viewModel)
 }

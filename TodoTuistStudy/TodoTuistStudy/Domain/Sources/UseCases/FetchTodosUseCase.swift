@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct FetchTodosUseCase {
+public struct FetchTodosUseCase {
     private let repository: TodoRepository
 
-    init(repository: TodoRepository) {
+    public init(repository: TodoRepository) {
         self.repository = repository
     }
 
-    func execute() -> [Todo] {
+    public func execute() -> [Todo] {
         repository.fetchTodos()
     }
 }

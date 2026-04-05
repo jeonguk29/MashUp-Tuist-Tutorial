@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ToggleTodoUseCase {
+public struct ToggleTodoUseCase {
     private let repository: TodoRepository
 
-    init(repository: TodoRepository) {
+    public init(repository: TodoRepository) {
         self.repository = repository
     }
 
-    func execute(id: UUID) {
+    public func execute(id: UUID) {
         repository.toggleTodo(id: id)
     }
 }

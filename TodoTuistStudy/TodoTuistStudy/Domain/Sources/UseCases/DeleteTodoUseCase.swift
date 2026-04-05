@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct DeleteTodoUseCase {
+public struct DeleteTodoUseCase {
     private let repository: TodoRepository
 
-    init(repository: TodoRepository) {
+    public init(repository: TodoRepository) {
         self.repository = repository
     }
 
-    func execute(ids: [UUID]) {
+    public func execute(ids: [UUID]) {
         repository.deleteTodos(ids: ids)
     }
 }

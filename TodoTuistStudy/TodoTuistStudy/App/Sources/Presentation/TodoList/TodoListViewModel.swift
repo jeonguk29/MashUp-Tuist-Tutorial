@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Domain
 
 final class TodoListViewModel: ObservableObject {
     @Published private(set) var state = TodoListState()
