@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Data 역할까지 같이 하고 있는 상태
     @State private var todos: [Todo] = [
         Todo(title: "Tuist 프로젝트 구조 이해하기", isDone: false),
         Todo(title: "가장 작은 TODO 앱 만들기", isDone: true)
@@ -54,6 +55,7 @@ private extension ContentView {
         }
     }
     
+    // Domain 규칙
     func addTodo() {
         let trimmedText = newTodoText.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -63,6 +65,7 @@ private extension ContentView {
         newTodoText = ""
     }
     
+    // Domain 규칙
     func deleteTodo(at offsets: IndexSet) {
         todos.remove(atOffsets: offsets)
     }
