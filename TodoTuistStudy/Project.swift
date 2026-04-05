@@ -23,7 +23,8 @@ let project = Project(
                 "TodoTuistStudy/App/Resources/**"
             ],
             dependencies: [
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "Data")
             ]
         ),
         .target(
@@ -60,6 +61,33 @@ let project = Project(
                 "TodoTuistStudy/Domain/Tests/**/*.swift"
             ],
             dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "Data",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: "dev.tuist.Data",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Data/Sources/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "DataTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.DataTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Data/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "Data"),
                 .target(name: "Domain")
             ]
         )

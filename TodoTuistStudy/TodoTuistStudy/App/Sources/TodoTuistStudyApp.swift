@@ -1,16 +1,20 @@
 import SwiftUI
 import Domain
+import Data
 
 @main
 struct TodoTuistStudyApp: App {
     var body: some Scene {
         WindowGroup {
-            let repository = InMemoryTodoRepository(
+ 
+            let dataSource = DefaultTodoLocalDataSource(
                 initialTodos: [
-                    Todo(title: "Tuist 프로젝트 구조 이해하기", isDone: false),
-                    Todo(title: "Domain 타깃 분리하기", isDone: true)
+                    TodoDTO(id: UUID(), title: "Tuist 구조 익히기", isDone: false),
+                    TodoDTO(id: UUID(), title: "Domain 분리하기", isDone: true)
                 ]
             )
+
+            let repository = InMemoryTodoRepository(dataSource: dataSource)
 
             let viewModel = TodoListViewModel(
                 fetchTodosUseCase: FetchTodosUseCase(repository: repository),
