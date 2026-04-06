@@ -27,6 +27,15 @@ public final class DefaultTodoLocalDataSource: TodoLocalDataSource {
         todos.append(newTodo)
     }
 
+    public func updateTodo(id: UUID, title: String) {
+        guard let index = todos.firstIndex(where: { $0.id == id }) else { return }
+        todos[index] = TodoDTO(
+            id: todos[index].id,
+            title: title,
+            isDone: todos[index].isDone
+        )
+    }
+
     public func toggleTodo(id: UUID) {
         guard let index = todos.firstIndex(where: { $0.id == id }) else { return }
         todos[index].isDone.toggle()

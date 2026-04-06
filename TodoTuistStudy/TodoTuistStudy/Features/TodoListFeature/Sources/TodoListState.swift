@@ -1,0 +1,9 @@
+import Domain
+
+public struct TodoListState {
+    public var todos: [Todo] = []
+
+    public init(todos: [Todo] = []) {
+        self.todos = todos
+    }
+}

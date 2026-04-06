@@ -17,14 +17,17 @@ let project = Project(
                 ]
             ),
             sources: [
-                "TodoTuistStudy/App/**/*.swift"
+                "TodoTuistStudy/App/Sources/**/*.swift"
             ],
             resources: [
-                "TodoTuistStudy/App/Resources/**"
+                "TodoTuistStudy/App/Sources/Resources/**"
             ],
             dependencies: [
                 .target(name: "Domain"),
-                .target(name: "Data")
+                .target(name: "Data"),
+                .target(name: "TodoListFeature"),
+                .target(name: "TodoDetailFeature"),
+                .target(name: "TodoEditFeature")
             ]
         ),
         .target(
@@ -38,6 +41,87 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "TodoTuistStudy")
+            ]
+        ),
+        .target(
+            name: "TodoListFeature",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: "dev.tuist.TodoListFeature",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoListFeature/Sources/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "TodoListFeatureTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.TodoListFeatureTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoListFeature/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoListFeature"),
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "TodoDetailFeature",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: "dev.tuist.TodoDetailFeature",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoDetailFeature/Sources/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "TodoDetailFeatureTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.TodoDetailFeatureTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoDetailFeature/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoDetailFeature"),
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "TodoEditFeature",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: "dev.tuist.TodoEditFeature",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoEditFeature/Sources/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "Domain")
+            ]
+        ),
+        .target(
+            name: "TodoEditFeatureTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.TodoEditFeatureTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/Features/TodoEditFeature/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoEditFeature"),
+                .target(name: "Domain")
             ]
         ),
         .target(

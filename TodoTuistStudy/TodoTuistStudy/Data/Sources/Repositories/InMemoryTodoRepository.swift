@@ -23,6 +23,10 @@ public final class InMemoryTodoRepository: TodoRepository {
         dataSource.addTodo(title: title)
     }
 
+    public func updateTodo(id: UUID, title: String) {
+        dataSource.updateTodo(id: id, title: title)
+    }
+
     public func toggleTodo(id: UUID) {
         dataSource.toggleTodo(id: id)
     }
