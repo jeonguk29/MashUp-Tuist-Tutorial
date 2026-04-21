@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DataInterface
 
 public struct ToggleTodoUseCase {
     private let repository: TodoRepository

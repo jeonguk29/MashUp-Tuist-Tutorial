@@ -1,10 +1,7 @@
-import Testing
-@testable import TodoTuistStudy
+import XCTest
 
-struct TodoTuistStudyTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+final class TodoTuistStudyTests: XCTestCase {
+    func testPlaceholder() {
+        XCTAssertTrue(true)
     }
-
 }
