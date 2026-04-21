@@ -24,7 +24,9 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "Domain"),
-                .target(name: "Data"),
+                .target(name: "CacheData"),
+                .target(name: "NetworkData"),
+                .target(name: "DataInterface"),
                 .target(name: "TodoListFeature"),
                 .target(name: "TodoDetailFeature"),
                 .target(name: "TodoEditFeature")
@@ -53,7 +55,8 @@ let project = Project(
                 "TodoTuistStudy/Features/TodoListFeature/Sources/**/*.swift"
             ],
             dependencies: [
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -67,7 +70,8 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "TodoListFeature"),
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -80,7 +84,8 @@ let project = Project(
                 "TodoTuistStudy/Features/TodoDetailFeature/Sources/**/*.swift"
             ],
             dependencies: [
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -94,7 +99,8 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "TodoDetailFeature"),
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -107,7 +113,8 @@ let project = Project(
                 "TodoTuistStudy/Features/TodoEditFeature/Sources/**/*.swift"
             ],
             dependencies: [
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -121,7 +128,32 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: "TodoEditFeature"),
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
+            ]
+        ),
+        .target(
+            name: "DataInterface",
+            destinations: .iOS,
+            product: .framework,
+            bundleId: "dev.tuist.DataInterface",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/DataInterface/Sources/**/*.swift"
+            ],
+            dependencies: []
+        ),
+        .target(
+            name: "DataInterfaceTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.DataInterfaceTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/DataInterface/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "DataInterface")
             ]
         ),
         .target(
@@ -133,7 +165,9 @@ let project = Project(
             sources: [
                 "TodoTuistStudy/Domain/Sources/**/*.swift"
             ],
-            dependencies: []
+            dependencies: [
+                .target(name: "DataInterface")
+            ]
         ),
         .target(
             name: "DomainTests",
@@ -145,33 +179,61 @@ let project = Project(
                 "TodoTuistStudy/Domain/Tests/**/*.swift"
             ],
             dependencies: [
-                .target(name: "Domain")
+                .target(name: "Domain"),
+                .target(name: "DataInterface")
             ]
         ),
         .target(
-            name: "Data",
+            name: "CacheData",
             destinations: .iOS,
             product: .framework,
-            bundleId: "dev.tuist.Data",
+            bundleId: "dev.tuist.CacheData",
             infoPlist: .default,
             sources: [
-                "TodoTuistStudy/Data/Sources/**/*.swift"
+                "TodoTuistStudy/CacheData/Sources/**/*.swift"
             ],
             dependencies: [
+                .target(name: "DataInterface")
+            ]
+        ),
+        .target(
+            name: "CacheDataTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.CacheDataTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/CacheData/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "CacheData"),
                 .target(name: "Domain")
             ]
         ),
         .target(
-            name: "DataTests",
+            name: "NetworkData",
             destinations: .iOS,
-            product: .unitTests,
-            bundleId: "dev.tuist.DataTests",
+            product: .framework,
+            bundleId: "dev.tuist.NetworkData",
             infoPlist: .default,
             sources: [
-                "TodoTuistStudy/Data/Tests/**/*.swift"
+                "TodoTuistStudy/NetworkData/Sources/**/*.swift"
             ],
             dependencies: [
-                .target(name: "Data"),
+                .target(name: "DataInterface")
+            ]
+        ),
+        .target(
+            name: "NetworkDataTests",
+            destinations: .iOS,
+            product: .unitTests,
+            bundleId: "dev.tuist.NetworkDataTests",
+            infoPlist: .default,
+            sources: [
+                "TodoTuistStudy/NetworkData/Tests/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "NetworkData"),
                 .target(name: "Domain")
             ]
         )

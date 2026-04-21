@@ -1,4 +1,5 @@
 import Foundation
+import DataInterface
 
 public struct UpdateTodoUseCase {
     private let repository: TodoRepository

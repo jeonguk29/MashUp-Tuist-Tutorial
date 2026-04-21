@@ -1,5 +1,6 @@
 import Foundation
 import XCTest
+import DataInterface
 @testable import Domain
 
 final class DomainTests: XCTestCase {

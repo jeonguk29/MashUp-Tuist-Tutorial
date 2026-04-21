@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DataInterface
 
 public struct DeleteTodoUseCase {
     private let repository: TodoRepository

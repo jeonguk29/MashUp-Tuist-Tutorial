@@ -1,4 +1,4 @@
-import Domain
+import DataInterface
 
 public enum TodoEditMode {
     case create
