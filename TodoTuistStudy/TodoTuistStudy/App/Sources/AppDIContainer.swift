@@ -7,6 +7,7 @@ import TodoListFeature
 import TodoDetailFeature
 import TodoEditFeature
 
+@MainActor
 final class AppDIContainer {
 
     // MARK: - Infrastructure
