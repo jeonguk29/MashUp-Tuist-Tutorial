@@ -296,5 +296,19 @@ let project = Project(
                 .target(name: "NetworkData")
             ]
         )
+    ],
+    schemes: [
+        .scheme(
+            name: "TodoListFeatureDemo",
+            buildAction: .buildAction(targets: ["TodoListFeatureDemo"])
+        ),
+        .scheme(
+            name: "TodoDetailFeatureDemo",
+            buildAction: .buildAction(targets: ["TodoDetailFeatureDemo"])
+        ),
+        .scheme(
+            name: "TodoEditFeatureDemo",
+            buildAction: .buildAction(targets: ["TodoEditFeatureDemo"])
+        ),
     ]
 )
