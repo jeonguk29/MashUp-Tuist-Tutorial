@@ -226,6 +226,75 @@ let project = Project(
                 .target(name: "NetworkData"),
                 .target(name: "Repository")
             ]
+        ),
+        .target(
+            name: "TodoListFeatureDemo",
+            destinations: .iOS,
+            product: .app,
+            bundleId: "dev.tuist.TodoListFeatureDemo",
+            infoPlist: .extendingDefault(
+                with: [
+                    "UILaunchScreen": [
+                        "UIColorName": "",
+                        "UIImageName": "",
+                    ],
+                ]
+            ),
+            sources: [
+                "TodoTuistStudy/Features/TodoListFeature/DemoApp/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoListFeature"),
+                .target(name: "Repository"),
+                .target(name: "CacheData"),
+                .target(name: "NetworkData")
+            ]
+        ),
+        .target(
+            name: "TodoDetailFeatureDemo",
+            destinations: .iOS,
+            product: .app,
+            bundleId: "dev.tuist.TodoDetailFeatureDemo",
+            infoPlist: .extendingDefault(
+                with: [
+                    "UILaunchScreen": [
+                        "UIColorName": "",
+                        "UIImageName": "",
+                    ],
+                ]
+            ),
+            sources: [
+                "TodoTuistStudy/Features/TodoDetailFeature/DemoApp/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoDetailFeature"),
+                .target(name: "Repository"),
+                .target(name: "CacheData"),
+                .target(name: "NetworkData")
+            ]
+        ),
+        .target(
+            name: "TodoEditFeatureDemo",
+            destinations: .iOS,
+            product: .app,
+            bundleId: "dev.tuist.TodoEditFeatureDemo",
+            infoPlist: .extendingDefault(
+                with: [
+                    "UILaunchScreen": [
+                        "UIColorName": "",
+                        "UIImageName": "",
+                    ],
+                ]
+            ),
+            sources: [
+                "TodoTuistStudy/Features/TodoEditFeature/DemoApp/**/*.swift"
+            ],
+            dependencies: [
+                .target(name: "TodoEditFeature"),
+                .target(name: "Repository"),
+                .target(name: "CacheData"),
+                .target(name: "NetworkData")
+            ]
         )
     ]
 )
