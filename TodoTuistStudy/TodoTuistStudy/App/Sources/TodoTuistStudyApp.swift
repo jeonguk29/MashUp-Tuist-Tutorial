@@ -2,9 +2,11 @@ import SwiftUI
 
 @main
 struct TodoTuistStudyApp: App {
+    @State private var container = AppDIContainer()
+
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView()
+            AppCoordinatorView(container: container)
         }
     }
 }

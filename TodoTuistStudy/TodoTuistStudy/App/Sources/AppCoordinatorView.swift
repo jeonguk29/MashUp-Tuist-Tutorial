@@ -15,7 +15,7 @@ struct AppCoordinatorView: View {
 
     // MARK: - Init
 
-    init(container: AppDIContainer = AppDIContainer()) {
+    init(container: AppDIContainer) {
         self.container = container
     }
 
