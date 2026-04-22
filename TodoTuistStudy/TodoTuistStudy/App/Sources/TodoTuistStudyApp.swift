@@ -1,8 +1,8 @@
 import SwiftUI
 import Domain
+import Repository
 import CacheData
 import NetworkData
-import DataInterface
 import TodoListFeature
 import TodoDetailFeature
 import TodoEditFeature
@@ -26,13 +26,15 @@ private struct AppCoordinatorView: View {
     private let deleteTodoUseCase: DeleteTodoUseCase
 
     init() {
-        let cacheRepository: any CachedTodoRepositorySpec = CachedTodoRepository()
-        let networkRepository: any NetworkTodoRepositorySpec = NetworkTodoRepository()
         // 학습용 예시:
-        // 같은 TodoRepository 인터페이스를 구현하는 CacheData / NetworkData 중
-        // App이 어떤 구현체를 사용할지 선택해서 주입한다.
-        let repository: TodoRepository = cacheRepository
-        _ = networkRepository
+        // CacheData / NetworkData는 DataSource 프로토콜만 구현한다 (DTO-only, Domain 모름).
+        // Repository 모듈이 두 DataSource를 조율하고 DTO→Entity 변환을 담당한다.
+        let cacheSource: any CachedTodoDataSource = InMemoryCachedTodoDataSource()
+        let networkSource: any NetworkTodoDataSource = InMemoryNetworkTodoDataSource()
+        let repository: TodoRepository = CompositeTodoRepository(
+            cache: cacheSource,
+            network: networkSource
+        )
         self.fetchTodosUseCase = FetchTodosUseCase(repository: repository)
         self.addTodoUseCase = AddTodoUseCase(repository: repository)
         self.updateTodoUseCase = UpdateTodoUseCase(repository: repository)

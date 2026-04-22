@@ -1,13 +1,14 @@
 import XCTest
+import Repository
 @testable import NetworkData
 
 final class NetworkDataTests: XCTestCase {
-    func testNetworkRepositoryReturnsDummyTodos() {
-        let repository = NetworkTodoRepository()
+    func testNetworkDataSourceReturnsDummyEntries() {
+        let dataSource = InMemoryNetworkTodoDataSource()
 
-        let todos = repository.fetchTodos()
+        let entries = dataSource.readAll()
 
-        XCTAssertEqual(todos.count, 3)
-        XCTAssertEqual(todos.first?.title, "서버에서 내려온 최신 할 일")
+        XCTAssertEqual(entries.count, 3)
+        XCTAssertEqual(entries.first?.title, "서버에서 내려온 최신 할 일")
     }
 }

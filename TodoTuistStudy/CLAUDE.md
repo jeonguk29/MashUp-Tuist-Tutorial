@@ -36,31 +36,34 @@ Xcode project/workspace and `Derived/` are gitignored — always run `tuist gene
 
 ## Architecture
 
-Clean Architecture with modular Tuist targets. Dependency flow:
+Clean Architecture with modular Tuist targets. 3-tier data layer (Domain / Repository / DataSource):
 
 ```
 App (TodoTuistStudy)
-  ├── Domain            ← pure entities + repository protocols + use cases
-  ├── DataInterface     ← typed sub-protocols of TodoRepository
-  ├── CacheData         ← implements CachedTodoRepositorySpec
-  ├── NetworkData       ← implements NetworkTodoRepositorySpec
+  ├── Domain            ← pure entities + TodoRepository protocol + use cases
+  ├── Repository        ← DataSource protocols + public DTOs + TodoRepository impl (CompositeTodoRepository)
+  ├── CacheData         ← InMemoryCachedTodoDataSource (implements CachedTodoDataSource, DTO-only)
+  ├── NetworkData       ← InMemoryNetworkTodoDataSource (implements NetworkTodoDataSource, DTO-only)
   ├── TodoListFeature
   ├── TodoDetailFeature
   └── TodoEditFeature
 
 Domain           ← no dependencies
-DataInterface    ← Domain
-CacheData        ← Domain + DataInterface
-NetworkData      ← Domain + DataInterface
+Repository       ← Domain
+CacheData        ← Repository           (does NOT import Domain)
+NetworkData      ← Repository           (does NOT import Domain)
 TodoListFeature  ← Domain
 TodoDetailFeature ← Domain
 TodoEditFeature  ← Domain
 ```
 
+Repository module owns orchestration (cache-first, network fallback, write-through) and DTO→Entity conversion, so the concrete Data modules only know their own DTO shapes.
+
 ### Layer Rules (strictly enforced)
-- `Domain` must NOT import any Data layer
-- `Feature` modules must NOT import Data directly and must NOT import each other
-- `App` is the only composition root — it wires concrete repositories into use cases
+- `Domain` must NOT import any other module
+- `CacheData` / `NetworkData` must NOT import `Domain` — they speak only DTO + Repository protocols
+- `Feature` modules must NOT import Data modules directly and must NOT import each other
+- `App` is the only composition root — it wires `InMemory*DataSource` into `CompositeTodoRepository` and injects that repository into use cases
 
 ### Key Patterns
 - MVVM: `@StateObject` ViewModels with `@MainActor` and `ObservableObject`
@@ -74,9 +77,9 @@ All source lives under `TodoTuistStudy/` with this structure:
 
 ```
 Domain/Sources/Entities/, Repositories/, UseCases/
-DataInterface/Sources/Repositories/
-CacheData/Sources/DTO/, Repositories/
-NetworkData/Sources/DTO/, Repositories/
+Repository/Sources/DataSources/, DTO/, Repositories/
+CacheData/Sources/
+NetworkData/Sources/
 Features/TodoListFeature/Sources/
 Features/TodoDetailFeature/Sources/
 Features/TodoEditFeature/Sources/

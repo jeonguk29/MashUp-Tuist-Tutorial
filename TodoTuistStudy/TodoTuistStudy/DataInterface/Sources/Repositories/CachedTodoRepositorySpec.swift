@@ -1,1 +1,0 @@
-public protocol CachedTodoRepositorySpec: TodoRepository {}

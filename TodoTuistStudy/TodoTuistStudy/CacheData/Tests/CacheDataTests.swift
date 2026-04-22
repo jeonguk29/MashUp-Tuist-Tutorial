@@ -1,15 +1,16 @@
 import XCTest
+import Repository
 @testable import CacheData
 
 final class CacheDataTests: XCTestCase {
-    func testCachedRepositoryUpdatesTodoTitle() {
-        let todoID = UUID()
-        let repository = CachedTodoRepository(
-            defaultTodos: [CachedTodoDTO(id: todoID, title: "이전 제목", isDone: false)]
+    func testCachedDataSourceUpdatesEntryTitle() {
+        let id = UUID()
+        let dataSource = InMemoryCachedTodoDataSource(
+            defaultEntries: [CachedTodoDTO(id: id, title: "이전 제목", isDone: false)]
         )
 
-        repository.updateTodo(id: todoID, title: "새 제목")
+        dataSource.update(id: id, title: "새 제목")
 
-        XCTAssertEqual(repository.fetchTodos().first?.title, "새 제목")
+        XCTAssertEqual(dataSource.readAll().first?.title, "새 제목")
     }
 }

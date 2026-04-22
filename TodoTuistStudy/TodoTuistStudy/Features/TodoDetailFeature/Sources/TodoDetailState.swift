@@ -1,4 +1,4 @@
-import DataInterface
+import Domain
 
 public struct TodoDetailState {
     public var todo: Todo?

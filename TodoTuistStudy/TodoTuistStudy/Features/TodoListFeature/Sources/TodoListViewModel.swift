@@ -1,6 +1,5 @@
 import Foundation
 import Domain
-import DataInterface
 
 @MainActor
 public final class TodoListViewModel: ObservableObject {

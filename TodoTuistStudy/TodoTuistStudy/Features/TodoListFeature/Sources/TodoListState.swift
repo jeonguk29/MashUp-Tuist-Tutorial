@@ -1,4 +1,4 @@
-import DataInterface
+import Domain
 
 public struct TodoListState {
     public var todos: [Todo] = []
